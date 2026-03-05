@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/kleffio/argocd
-    targetRevision: develop
+    targetRevision: main
     path: charts/external-secrets
   destination:
     server: https://kubernetes.default.svc
