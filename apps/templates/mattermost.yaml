@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://helm.mattermost.com
     chart: mattermost-team-edition
-    targetRevision: "6.6.22"
+    targetRevision: "*"
     helm:
       valuesObject:
         replicaCount: 1
