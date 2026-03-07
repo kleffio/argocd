@@ -16,6 +16,13 @@ spec:
           adminPassword: ""
           existingSecret: kimai-secrets
           existingSecretKey: adminPassword
+          databasePassword: ""
+        extraEnvs:
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: kimai-secrets
+                key: mariadb-password
         mariadb:
           enabled: true
           auth:
