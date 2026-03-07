@@ -12,9 +12,8 @@ spec:
     helm:
       valuesObject:
         authentik:
-          secret_key:
-            existingSecret: authentik-secrets
-            existingSecretKey: secretKey
+          secret_key: ""
+          existingSecret: authentik-secrets
           error_reporting:
             enabled: false
           postgresql:
