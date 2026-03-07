@@ -14,6 +14,8 @@ spec:
         kimaiAdminEmail: admin@kleff.ca
         kimaiAdminPassword: ""
         kimaiAdminPasswordSecret: kimai-secrets
+        trustedHosts: "kimai.kleff.ca"
+        trustedProxies: "0.0.0.0/0"
         mariadb:
           enabled: true
           auth:
