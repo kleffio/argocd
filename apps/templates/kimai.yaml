@@ -17,6 +17,9 @@ spec:
         ingress:
           enabled: false
           hostname: kimai.kleff.ca
+        extraEnvVars:
+          - name: TRUSTED_HOSTS
+            value: "^(localhost|kimai\\.kleff\\.ca)$"
         mariadb:
           enabled: true
           auth:
