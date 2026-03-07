@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://robjuz.github.io/helm-charts
+    repoURL: https://robjuz.github.io/helm-charts/
     chart: kimai
     targetRevision: "2.0.0"
     helm:
