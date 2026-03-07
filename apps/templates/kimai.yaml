@@ -14,11 +14,9 @@ spec:
         kimaiAdminEmail: admin@kleff.ca
         kimaiAdminPassword: ""
         kimaiAdminPasswordSecret: kimai-secrets
-        extraEnvs:
-          - name: TRUSTED_HOSTS
-            value: "kimai.kleff.ca,localhost"
-          - name: TRUSTED_PROXIES
-            value: "0.0.0.0/0"
+        ingress:
+          enabled: false
+          hostname: kimai.kleff.ca
         mariadb:
           enabled: true
           auth:
