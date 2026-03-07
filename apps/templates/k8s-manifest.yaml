@@ -13,7 +13,7 @@ spec:
     repoURL: https://github.com/kleffio/argocd.git
     targetRevision: HEAD
     directory:
-      recurse: true
+      recurse: false
   syncPolicy:
     automated:
       prune: true
