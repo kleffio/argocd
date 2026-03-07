@@ -12,20 +12,49 @@ spec:
     helm:
       valuesObject:
         authentik:
-          secret_key: ""
-          existingSecret: authentik-secrets
+          secret_key: "$(AUTHENTIK_SECRET_KEY)"
           error_reporting:
             enabled: false
           postgresql:
-            password: ""
-            existingSecret: authentik-secrets
+            password: "$(AUTHENTIK_POSTGRESQL_PASSWORD)"
           redis:
-            password: ""
-            existingSecret: authentik-secrets
+            password: "$(AUTHENTIK_REDIS_PASSWORD)"
         server:
           replicas: 1
+          env:
+            - name: AUTHENTIK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: secretKey
+            - name: AUTHENTIK_POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: postgresqlPassword
+            - name: AUTHENTIK_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: redisPassword
         worker:
           replicas: 1
+          env:
+            - name: AUTHENTIK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: secretKey
+            - name: AUTHENTIK_POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: postgresqlPassword
+            - name: AUTHENTIK_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: authentik-secrets
+                  key: redisPassword
         postgresql:
           enabled: true
           auth:
