@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mattermost
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://helm.mattermost.com
+    chart: mattermost-team-edition
+    targetRevision: "6.6.22"
+    helm:
+      valuesObject:
+        replicaCount: 1
+        service:
+          type: ClusterIP
+          port: 8065
+        mysql:
+          enabled: true
+          mysqlUser: mattermost
+          mysqlDatabase: mattermost
+          existingSecret: mattermost-secrets
+          persistence:
+            enabled: true
+            size: 10Gi
+        persistence:
+          data:
+            enabled: true
+            size: 10Gi
+        config:
+          MM_SERVICESETTINGS_SITEURL: "https://mattermost.kleff.ca"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mattermost
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

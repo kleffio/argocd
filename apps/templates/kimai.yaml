@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kimai
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://kimai.github.io/helm-charts
+    chart: kimai
+    targetRevision: "2.0.0"
+    helm:
+      valuesObject:
+        replicaCount: 1
+        image:
+          repository: kimai/kimai2
+          tag: "apache"
+          pullPolicy: IfNotPresent
+        kimai:
+          adminEmail: admin@kleff.ca
+          existingSecret: kimai-secrets
+          existingSecretKey: adminPassword
+        mariadb:
+          enabled: true
+          auth:
+            existingSecret: kimai-secrets
+            database: kimai
+            username: kimai
+          primary:
+            persistence:
+              enabled: true
+              size: 5Gi
+        persistence:
+          enabled: true
+          size: 5Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kimai
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
