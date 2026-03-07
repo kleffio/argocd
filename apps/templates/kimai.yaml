@@ -11,13 +11,9 @@ spec:
     targetRevision: "*"
     helm:
       valuesObject:
-        replicaCount: 1
-        image:
-          repository: kimai/kimai2
-          tag: "apache"
-          pullPolicy: IfNotPresent
         kimai:
           adminEmail: admin@kleff.ca
+          adminPassword: ""
           existingSecret: kimai-secrets
           existingSecretKey: adminPassword
         mariadb:
