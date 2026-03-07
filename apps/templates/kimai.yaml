@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://kimai.github.io/helm-charts
+    repoURL: https://tobybellwood.github.io/kimai-helm
     chart: kimai
     targetRevision: "2.0.0"
     helm:
