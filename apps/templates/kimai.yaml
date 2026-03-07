@@ -11,18 +11,9 @@ spec:
     targetRevision: "*"
     helm:
       valuesObject:
-        kimai:
-          adminEmail: admin@kleff.ca
-          adminPassword: ""
-          existingSecret: kimai-secrets
-          existingSecretKey: adminPassword
-          databasePassword: ""
-        extraEnvs:
-          - name: DATABASE_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: kimai-secrets
-                key: mariadb-password
+        kimaiAdminEmail: admin@kleff.ca
+        kimaiAdminPassword: ""
+        kimaiAdminPasswordSecret: kimai-secrets
         mariadb:
           enabled: true
           auth:
