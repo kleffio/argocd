@@ -35,9 +35,9 @@ spec:
           - name: TRUSTED_HOSTS
             value: ".*"
           - name: TRUSTED_PROXIES
-            value: "0.0.0.0/0"  
+            value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" 
           - name: APP_URL
-            value: "https://kimai.kleff.ca" 
+            value: "https://kimai.kleff.ca"
           - name: KIMAI_SAML_ACTIVATE
             value: "true"
         
