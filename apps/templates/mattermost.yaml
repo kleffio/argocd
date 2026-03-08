@@ -17,6 +17,14 @@ spec:
         service:
           type: ClusterIP
           port: 8065
+        extraEnvVars:
+          - name: MM_SQLSETTINGS_DATASOURCE
+            valueFrom:
+              secretKeyRef:
+                name: mattermost-secrets
+                key: mysql-dsn
+          - name: MM_SQLSETTINGS_DRIVERNAME
+            value: "mysql"
         mysql:
           enabled: true
           mysqlUser: mattermost
