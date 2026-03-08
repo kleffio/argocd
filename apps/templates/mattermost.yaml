@@ -15,7 +15,8 @@ spec:
         service:
           type: ClusterIP
           port: 8065
-        extraArgs:
+        command:
+          - mattermost
           - server
         extraEnvs:
           - name: MM_SQLSETTINGS_DATASOURCE
