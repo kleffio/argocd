@@ -22,8 +22,6 @@ spec:
           enabled: false
           hostname: kimai.kleff.ca
         
-        # We are moving away from the chart's config parameters because they are failing
-        # Instead, we mount your "kimai-saml-config" directly into the path Kimai expects
         extraVolumes:
           - name: forced-saml-config
             configMap:
