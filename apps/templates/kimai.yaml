@@ -33,10 +33,13 @@ spec:
         
         extraEnvVars:
           - name: TRUSTED_HOSTS
-            value: ".*"
+            # Strict regex to ensure matching for your domain
+            value: "^(localhost|kimai\\.kleff\\.ca)$"
           - name: TRUSTED_PROXIES
-            value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" 
+            # Broadened to trust your internal Ingress IPs
+            value: "0.0.0.0/0" 
           - name: APP_URL
+            # Forces the application to use HTTPS for internal logic
             value: "https://kimai.kleff.ca"
           - name: KIMAI_SAML_ACTIVATE
             value: "true"
