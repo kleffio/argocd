@@ -22,6 +22,7 @@ spec:
           existingSecretKey: adminPassword
           saml:
             activate: true
+            provider: "authentik"
             title: "Login with Authentik"
             connection:
               idp:
