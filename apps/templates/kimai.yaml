@@ -22,8 +22,16 @@ spec:
           enabled: false
           hostname: kimai.kleff.ca
         
-        kimai:
-          existingConfigMap: "kimai-saml-config"
+        # We are moving away from the chart's config parameters because they are failing
+        # Instead, we mount your "kimai-saml-config" directly into the path Kimai expects
+        extraVolumes:
+          - name: forced-saml-config
+            configMap:
+              name: kimai-saml-config
+        extraVolumeMounts:
+          - name: forced-saml-config
+            mountPath: /opt/kimai/config/packages/local.yaml
+            subPath: local.yaml
         
         extraEnvVars:
           - name: TRUSTED_HOSTS
