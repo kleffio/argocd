@@ -20,6 +20,53 @@ spec:
           adminEmail: admin@kleff.ca
           existingSecret: kimai-secrets
           existingSecretKey: adminPassword
+          saml:
+            activate: true
+            title: "Login with Authentik"
+            connection:
+              idp:
+                entityId: "https://auth.kleff.ca/"
+                singleSignOnService:
+                  url: "https://auth.kleff.ca/application/saml/kimai/sso/binding/redirect/"
+                x509cert: |
+                  -----BEGIN CERTIFICATE-----
+                  MIIFUzCCAzugAwIBAgIRAJ0nBplugUromWulp3mRN+AwDQYJKoZIhvcNAQELBQAw
+                  HTEbMBkGA1UEAwwSYXV0aGVudGlrIDIwMjYuMi4xMB4XDTI2MDMwNzA0MDAyOVoX
+                  DTI3MDMwODA0MDAyOVowVjEqMCgGA1UEAwwhYXV0aGVudGlrIFNlbGYtc2lnbmVk
+                  IENlcnRpZmljYXRlMRIwEAYDVQQKDAlhdXRoZW50aWsxFDASBgNVBAsMC1NlbGYt
+                  c2lnbmVkMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAnB/i8QHSSE7u
+                  SpNHmUv1ANtN8GcLgMbo9aD0gY9CtUAuQNxmaUoL4z3L7kYXCheMJVaKns8XJ5LC
+                  d38mO4kJyCzpBac02Zxw0TwfmTg6Bj/4/tdA7GOFX+Nwi5K7tJs8o4MCCC2MDBsR
+                  RHAMDIqvF0DXjHJcs1jKzvaXWWBbFH53LmtqKQLfzHxWoTKJ2MfSw2c7kz5VJvzU
+                  VKVPnlwDxzFKBDibIj9jt69XHwX0QlzS+fR64//ZMgEJ7EKSuls0QjZ6FKP8AyST
+                  5nsdDkXpHAXh3jXrKcDKxLfLXx/CwOChoZObXilRThQJrCWlK0V1fcJLNeMseW/y
+                  kJ6tLUoLNxCFiOBN925y18lo/4u7sS4R4wkDWKdfITcB0waRh/cLA1D/OfPs7oUi
+                  JYhSuUYGnpwny8PDkQyl2eysb2ad9H2iYDdkBOoQyEJCHbzK+zTKLuMLNmxNNlSy
+                  6OsaKHJ5wshrvHZ/KbylCefsHo4x6O+izoCr54Cw0AjC+ykuDslcoPw5M+i2rBvP
+                  0xncaII5+rc0NxGLU92zauhw79HhD41XbaYa1bHmZfp2mrCpw1kZg3uTV777oqXV
+                  1Xj9kqeS5nzGxChzPLaWbcfdYNyjNu+YEK0f6LUB8dt6JDfExFYTf6olUBb0ZKIP
+                  urJCBdpHRab4foNHe2AxNUOIfnvXZvUCAwEAAaNVMFMwUQYDVR0RAQH/BEcwRYJD
+                  Z0kzblY4QllnYWxHSWVrdDJ0ZWdSN2VCMERtOERoNDRLYmg2UDhGMi5zZWxmLXNp
+                  Z25lZC5nb2F1dGhlbnRpay5pbzANBgkqhkiG9w0BAQsFAAOCAgEAeaJOwlkiB39s
+                  oFTDP6Wtn+7O9BCT9fKdgABGXinfAjFSnMmr5J3LbSm+O9BnJec27eGXuxOUjD0Y
+                  g63QvoYYkw2bRr6Wmgkfp1eto8sXMEXEvRv2PundtVof8BdZnz+nYvY1v+2yeES2
+                  LXQjXXJfL9qaKuGeVbPWAL58jDxt4/DOgzVkxSNcL+fhyybybb+7EjPrEToZ2JDM
+                  JCUaXzXqkZ7HNarmm8cTmXlzv9p17kVCBHk3WfnRZxNjxUGryIAAJY5l8YTm9yPe
+                  JLAd/nhNSiNcsoGd73hsyQWQJ4A202V7sLrwmH4h8QD6/7X4QJGHr26easozLnbF
+                  P7rfiVP958uY4G9PyqjKsYAi+YBtAL/tw6NW2rMArlGOSsgKDDMfPkERoAPPqjyf
+                  2nXNHJMi/vq92WgIPCKIQnpm8sRhLB+I00M8WPSpM+OFgYlgvkgfOQ8BR/OdCqi3
+                  JML85iT8prrwUH+yvV1YOAT90X8dAiUJzYs/f07ImkkaD3OPQPVE00GZzgrzST+b
+                  CMw5pPbe+uSM6d48apxBybQFsoXbAxPcroj+oKxVPkF9fU1NPOa7RbnqZdudM6PO
+                  2osgTxTRPJcnBGs6GRryDA529ec+it2HYE8AkWjUid0pBJ8ruqUbLUFbj8VhC7pO
+                  zXLvwctgNeQ74Jqwy5/yj9IMARJ3Bd8=
+                  -----END CERTIFICATE-----
+              sp:
+                entityId: "https://kimai.kleff.ca/"
+                assertionConsumerService:
+                  url: "https://kimai.kleff.ca/auth/saml/acs"
+            mapping:
+              - { saml: '$http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress', kimai: email }
+              - { saml: '$http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name', kimai: alias }
         mariadb:
           enabled: true
           auth:
