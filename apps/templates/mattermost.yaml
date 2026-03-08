@@ -21,14 +21,20 @@ spec:
           enabled: true
           externalDriverType: "mysql"
           externalConnectionString: ""
-        mysql:
-          enabled: false
         extraEnvVars:
           - name: MM_SQLSETTINGS_DATASOURCE
             valueFrom:
               secretKeyRef:
                 name: mattermost-secrets
                 key: mysql-dsn
+        mysql:
+          enabled: true
+          mysqlUser: mattermost
+          mysqlDatabase: mattermost
+          existingSecret: mattermost-secrets
+          persistence:
+            enabled: true
+            size: 10Gi
         persistence:
           data:
             enabled: true
