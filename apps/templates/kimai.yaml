@@ -35,7 +35,7 @@ spec:
         
         extraEnvVars:
           - name: TRUSTED_HOSTS
-            value: "^(localhost|kimai\\.kleff\\.ca)$"
+            value: ".*"
           - name: KIMAI_SAML_ACTIVATE
             value: "true"
         
