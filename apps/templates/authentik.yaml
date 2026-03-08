@@ -20,7 +20,7 @@ spec:
           redis:
             password: "$(AUTHENTIK_REDIS_PASSWORD)"
         server:
-          replicas: 1
+          replicas: 2
           env:
             - name: AUTHENTIK_SECRET_KEY
               valueFrom:
@@ -38,7 +38,7 @@ spec:
                   name: authentik-secrets
                   key: redisPassword
         worker:
-          replicas: 1
+          replicas: 2
           env:
             - name: AUTHENTIK_SECRET_KEY
               valueFrom:
