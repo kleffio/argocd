@@ -41,6 +41,14 @@ spec:
             size: 10Gi
         config:
           MM_SERVICESETTINGS_SITEURL: "https://mattermost.kleff.ca"
+        livenessProbe:
+          initialDelaySeconds: 300
+          timeoutSeconds: 5
+          periodSeconds: 15
+        readinessProbe:
+          initialDelaySeconds: 300
+          timeoutSeconds: 5
+          periodSeconds: 15
   destination:
     server: https://kubernetes.default.svc
     namespace: mattermost
