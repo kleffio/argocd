@@ -27,12 +27,12 @@ spec:
                 secretKeyRef:
                   name: authentik-secrets
                   key: secretKey
-            - name: AUTHENTIK_POSTGRESQL_PASSWORD
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: authentik-secrets
                   key: postgresqlPassword
-            - name: AUTHENTIK_REDIS_PASSWORD
+            - name: AUTHENTIK_REDIS__PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: authentik-secrets
@@ -45,12 +45,12 @@ spec:
                 secretKeyRef:
                   name: authentik-secrets
                   key: secretKey
-            - name: AUTHENTIK_POSTGRESQL_PASSWORD
+            - name: AUTHENTIK_POSTGRESQL__PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: authentik-secrets
                   key: postgresqlPassword
-            - name: AUTHENTIK_REDIS_PASSWORD
+            - name: AUTHENTIK_REDIS__PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: authentik-secrets
