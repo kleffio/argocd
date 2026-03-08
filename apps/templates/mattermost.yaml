@@ -17,22 +17,18 @@ spec:
         service:
           type: ClusterIP
           port: 8065
+        externalDB:
+          enabled: true
+          externalDriverType: "mysql"
+          externalConnectionString: ""
+        mysql:
+          enabled: false
         extraEnvVars:
           - name: MM_SQLSETTINGS_DATASOURCE
             valueFrom:
               secretKeyRef:
                 name: mattermost-secrets
                 key: mysql-dsn
-          - name: MM_SQLSETTINGS_DRIVERNAME
-            value: "mysql"
-        mysql:
-          enabled: true
-          mysqlUser: mattermost
-          mysqlDatabase: mattermost
-          existingSecret: mattermost-secrets
-          persistence:
-            enabled: true
-            size: 10Gi
         persistence:
           data:
             enabled: true
