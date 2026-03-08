@@ -18,6 +18,8 @@ spec:
           pullPolicy: IfNotPresent
         kimai:
           config: null
+        volumes: [] 
+        volumeMounts: []
         kimaiAdminEmail: admin@kleff.ca
         kimaiAdminPasswordSecret: kimai-secrets
         ingress:
