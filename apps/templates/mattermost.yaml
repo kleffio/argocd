@@ -12,12 +12,11 @@ spec:
     helm:
       valuesObject:
         replicaCount: 1
+        image:
+          tag: "6.6.0"
         service:
           type: ClusterIP
           port: 8065
-        command:
-          - mattermost
-          - server
         extraEnvs:
           - name: MM_SQLSETTINGS_DATASOURCE
             valueFrom:
