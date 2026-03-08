@@ -21,6 +21,7 @@ spec:
         ingress:
           enabled: false
           hostname: kimai.kleff.ca
+        # This section generates the local.yaml file that was previously overriding you
         kimai:
           config:
             saml:
