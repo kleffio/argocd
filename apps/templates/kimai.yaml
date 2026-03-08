@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://kimai.github.io/helm-charts
-    chart: kimai
-    targetRevision: "2.0.0"
+    repoURL: https://robjuz.github.io/helm-charts/
+    chart: kimai2
+    targetRevision: "*"
     helm:
       valuesObject:
         replicaCount: 1
@@ -67,6 +67,15 @@ spec:
             mapping:
               - { saml: '$http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress', kimai: email }
               - { saml: '$http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name', kimai: alias }
+        kimaiAdminEmail: admin@kleff.ca
+        kimaiAdminPassword: ""
+        kimaiAdminPasswordSecret: kimai-secrets
+        ingress:
+          enabled: false
+          hostname: kimai.kleff.ca
+        extraEnvVars:
+          - name: TRUSTED_HOSTS
+            value: "^(localhost|kimai\\.kleff\\.ca)$"
         mariadb:
           enabled: true
           auth:

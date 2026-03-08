@@ -1,17 +1,12 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: kanboard
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kanboard
+  name: kanboards
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/NathanRoos/ArgoCD
+    repoURL: https://github.com/kleffio/argocd.git
     path: yamls/kanboard
     targetRevision: HEAD
   destination:

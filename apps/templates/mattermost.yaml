@@ -12,9 +12,21 @@ spec:
     helm:
       valuesObject:
         replicaCount: 1
+        image:
+          tag: "6.6.0"
         service:
           type: ClusterIP
           port: 8065
+        externalDB:
+          enabled: true
+          externalDriverType: "mysql"
+          externalConnectionString: ""
+        extraEnvVars:
+          - name: MM_SQLSETTINGS_DATASOURCE
+            valueFrom:
+              secretKeyRef:
+                name: mattermost-secrets
+                key: mysql-dsn
         mysql:
           enabled: true
           mysqlUser: mattermost
@@ -29,6 +41,14 @@ spec:
             size: 10Gi
         config:
           MM_SERVICESETTINGS_SITEURL: "https://mattermost.kleff.ca"
+        livenessProbe:
+          initialDelaySeconds: 300
+          timeoutSeconds: 5
+          periodSeconds: 15
+        readinessProbe:
+          initialDelaySeconds: 300
+          timeoutSeconds: 5
+          periodSeconds: 15
   destination:
     server: https://kubernetes.default.svc
     namespace: mattermost
