@@ -17,7 +17,6 @@ spec:
             tag: apache
             pullPolicy: IfNotPresent
           kimaiAdminEmail: admin@kleff.ca
-          # Use your ExternalSecret for all credentials to stop the diff drift
           kimaiAdminPasswordSecret: kimai-secrets
           existingSecret: kimai-secrets
           ingress:
@@ -53,10 +52,10 @@ spec:
             primary:
               persistence:
                 enabled: true
-                size: 4Gi # Changed to 4Gi to match your live cluster state
+                size: 4Gi # Matched to 4Gi based on your error log
           persistence:
             enabled: true
-            size: 4Gi # Changed to 4Gi to match your live cluster state
+            size: 4Gi # Matched to 4Gi based on your error log
     - repoURL: https://github.com/kleffio/argocd.git
       targetRevision: HEAD
       path: yamls
