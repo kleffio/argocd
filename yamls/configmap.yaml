@@ -7,13 +7,16 @@ data:
   local.yaml: |
     kimai:
       saml:
+        activate: true
+        title: "Login with SAML"
+        roles:
+          attribute: 'groups'
+          mapping:
+            - { saml: 'admins', kimai: 'ROLE_ADMIN' }
+            - { saml: 'users', kimai: 'ROLE_USER' }
         connection:
           baseurl: "https://kimai.kleff.ca/auth/saml/"
         mapping:
           - { saml: 'email', kimai: 'email' }
           - { saml: 'username', kimai: 'username' }
           - { saml: 'username', kimai: 'alias' }
-        defaults:
-          role: ROLE_USER
-          timezone: America/Toronto
-          language: en
