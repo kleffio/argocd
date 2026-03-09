@@ -1,70 +1,70 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: kimai
-#   namespace: argocd
-# spec:
-#   project: default
-#   sources:
-#     - repoURL: https://robjuz.github.io/helm-charts/
-#       chart: kimai2
-#       targetRevision: "*"
-#       helm:
-#         valuesObject:
-#           replicaCount: 1
-#           image:
-#             repository: kimai/kimai2
-#             tag: apache
-#             pullPolicy: IfNotPresent
-#           kimaiAdminEmail: admin@kleff.ca
-#           kimaiAdminPasswordSecret: kimai-secrets
-#           existingSecret: kimai-secrets
-#           ingress:
-#             enabled: false
-#             hostname: kimai.kleff.ca
-#           extraVolumes:
-#             - name: forced-saml-config
-#               configMap:
-#                 name: kimai-saml-config
-#           extraVolumeMounts:
-#             - name: forced-saml-config
-#               mountPath: /opt/kimai/config/packages/local.yaml
-#               subPath: local.yaml
-#           extraEnvVars:
-#             - name: TRUSTED_HOSTS
-#               value: "^(localhost|kimai\\.kleff\\.ca)$"
-#             - name: TRUSTED_PROXIES
-#               value: "0.0.0.0/0"
-#             - name: APP_URL
-#               value: "https://kimai.kleff.ca"
-#             - name: KIMAI_SAML_ACTIVATE
-#               value: "true"
-#             - name: KIMAI_REVERSE_PROXY_AUTH
-#               value: "true"
-#             - name: KIMAI_REVERSE_PROXY_USER_HEADER
-#               value: "HTTP_X_AUTHENTIK_USERNAME"
-#           mariadb:
-#             enabled: true
-#             auth:
-#               existingSecret: kimai-secrets
-#               database: kimai
-#               username: kimai
-#             primary:
-#               persistence:
-#                 enabled: true
-#                 size: 5Gi
-#           persistence:
-#             enabled: true
-#             size: 5Gi
-#     - repoURL: https://github.com/kleffio/argocd.git
-#       targetRevision: HEAD
-#       path: yamls
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: kimai
-#   syncPolicy:
-#     automated:
-#       prune: true
-#       selfHeal: true
-#     syncOptions:
-#       - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kimai
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://robjuz.github.io/helm-charts/
+      chart: kimai2
+      targetRevision: "*"
+      helm:
+        valuesObject:
+          replicaCount: 1
+          image:
+            repository: kimai/kimai2
+            tag: apache
+            pullPolicy: IfNotPresent
+          kimaiAdminEmail: admin@kleff.ca
+          kimaiAdminPasswordSecret: kimai-secrets
+          existingSecret: kimai-secrets
+          ingress:
+            enabled: false
+            hostname: kimai.kleff.ca
+          extraVolumes:
+            - name: forced-saml-config
+              configMap:
+                name: kimai-saml-config
+          extraVolumeMounts:
+            - name: forced-saml-config
+              mountPath: /opt/kimai/config/packages/local.yaml
+              subPath: local.yaml
+          extraEnvVars:
+            - name: TRUSTED_HOSTS
+              value: "^(localhost|kimai\\.kleff\\.ca)$"
+            - name: TRUSTED_PROXIES
+              value: "0.0.0.0/0"
+            - name: APP_URL
+              value: "https://kimai.kleff.ca"
+            - name: KIMAI_SAML_ACTIVATE
+              value: "true"
+            - name: KIMAI_REVERSE_PROXY_AUTH
+              value: "true"
+            - name: KIMAI_REVERSE_PROXY_USER_HEADER
+              value: "HTTP_X_AUTHENTIK_USERNAME"
+          mariadb:
+            enabled: true
+            auth:
+              existingSecret: kimai-secrets
+              database: kimai
+              username: kimai
+            primary:
+              persistence:
+                enabled: true
+                size: 5Gi
+          persistence:
+            enabled: true
+            size: 5Gi
+    - repoURL: https://github.com/kleffio/argocd.git
+      targetRevision: HEAD
+      path: yamls
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kimai
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
