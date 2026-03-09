@@ -37,8 +37,10 @@ spec:
               value: "HTTP_X_AUTHENTIK_USERNAME"
             - name: TRUSTED_PROXY_NETWORKS
               value: "0.0.0.0/0"
-            - name: HIDE_LOGIN_FORM
+            - name: KANBOARD_REVERSE_PROXY_AUTO_CREATE_USER
               value: "true"
+            - name: KANBOARD_REVERSE_PROXY_DEFAULT_ADMIN_ROLE
+              value: "false"
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
