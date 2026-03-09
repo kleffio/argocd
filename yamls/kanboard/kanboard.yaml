@@ -36,11 +36,11 @@ spec:
             - name: KANBOARD_REVERSE_PROXY_USER_HEADER
               value: "HTTP_X_AUTHENTIK_USERNAME"
             - name: TRUSTED_PROXY_NETWORKS
-              value: "0.0.0.0/0"
+              value: "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16" 
             - name: KANBOARD_REVERSE_PROXY_AUTO_CREATE_USER
               value: "true"
-            - name: KANBOARD_REVERSE_PROXY_DEFAULT_ADMIN_ROLE
-              value: "false"
+            - name: HIDE_LOGIN_FORM
+              value: "true"
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
