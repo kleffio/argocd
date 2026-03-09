@@ -21,7 +21,6 @@ spec:
         ingress:
           enabled: false
           hostname: kimai.kleff.ca
-        
         extraVolumes:
           - name: forced-saml-config
             configMap:
@@ -30,20 +29,19 @@ spec:
           - name: forced-saml-config
             mountPath: /opt/kimai/config/packages/local.yaml
             subPath: local.yaml
-        
         extraEnvVars:
           - name: TRUSTED_HOSTS
-            # Strict regex to ensure matching for your domain
             value: "^(localhost|kimai\\.kleff\\.ca)$"
           - name: TRUSTED_PROXIES
-            # Broadened to trust your internal Ingress IPs
-            value: "0.0.0.0/0" 
+            value: "0.0.0.0/0"
           - name: APP_URL
-            # Forces the application to use HTTPS for internal logic
             value: "https://kimai.kleff.ca"
           - name: KIMAI_SAML_ACTIVATE
             value: "true"
-        
+          - name: KIMAI_REVERSE_PROXY_AUTH
+            value: "true"
+          - name: KIMAI_REVERSE_PROXY_USER_HEADER
+            value: "HTTP_X_AUTHENTIK_USERNAME"
         mariadb:
           enabled: true
           auth:
