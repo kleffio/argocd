@@ -10,15 +10,19 @@ spec:
       chart: kimai2
       targetRevision: "*"
       helm:
-        valueFiles:
-          - $values/apps/templates/kimai.yaml 
         valuesObject:
           replicaCount: 1
           image:
             repository: kimai/kimai2
             tag: apache
+            pullPolicy: IfNotPresent
           kimaiAdminEmail: admin@kleff.ca
+          # Use your ExternalSecret for all credentials to stop the diff drift
           kimaiAdminPasswordSecret: kimai-secrets
+          existingSecret: kimai-secrets
+          ingress:
+            enabled: false
+            hostname: kimai.kleff.ca
           extraVolumes:
             - name: forced-saml-config
               configMap:
@@ -28,6 +32,10 @@ spec:
               mountPath: /opt/kimai/config/packages/local.yaml
               subPath: local.yaml
           extraEnvVars:
+            - name: TRUSTED_HOSTS
+              value: "^(localhost|kimai\\.kleff\\.ca)$"
+            - name: TRUSTED_PROXIES
+              value: "0.0.0.0/0"
             - name: APP_URL
               value: "https://kimai.kleff.ca"
             - name: KIMAI_SAML_ACTIVATE
@@ -35,15 +43,23 @@ spec:
             - name: KIMAI_REVERSE_PROXY_AUTH
               value: "true"
             - name: KIMAI_REVERSE_PROXY_USER_HEADER
-              value: HTTP_X_AUTHENTIK_USERNAME
+              value: "HTTP_X_AUTHENTIK_USERNAME"
           mariadb:
             enabled: true
             auth:
               existingSecret: kimai-secrets
               database: kimai
+              username: kimai
+            primary:
+              persistence:
+                enabled: true
+                size: 4Gi # Changed to 4Gi to match your live cluster state
+          persistence:
+            enabled: true
+            size: 4Gi # Changed to 4Gi to match your live cluster state
     - repoURL: https://github.com/kleffio/argocd.git
       targetRevision: HEAD
-      ref: values
+      path: yamls
   destination:
     server: https://kubernetes.default.svc
     namespace: kimai
@@ -51,3 +67,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
