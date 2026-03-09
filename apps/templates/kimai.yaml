@@ -52,10 +52,10 @@ spec:
             primary:
               persistence:
                 enabled: true
-                size: 4Gi # Matched to 4Gi based on your error log
+                size: 5Gi
           persistence:
             enabled: true
-            size: 4Gi # Matched to 4Gi based on your error log
+            size: 5Gi
     - repoURL: https://github.com/kleffio/argocd.git
       targetRevision: HEAD
       path: yamls
