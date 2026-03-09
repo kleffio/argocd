@@ -30,6 +30,11 @@ spec:
           image: kanboard/kanboard:latest
           ports:
             - containerPort: 80
+          env:
+            - name: KANBOARD_REVERSE_PROXY_AUTH
+              value: "true"
+            - name: KANBOARD_REVERSE_PROXY_USER_HEADER
+              value: "X-authentik-username"
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
