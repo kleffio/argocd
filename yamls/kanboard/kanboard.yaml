@@ -31,15 +31,7 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: KANBOARD_REVERSE_PROXY_AUTH
-              value: "true"
-            - name: KANBOARD_REVERSE_PROXY_USER_HEADER
-              value: "HTTP_X_AUTHENTIK_USERNAME"
-            - name: TRUSTED_PROXY_NETWORKS
-              value: "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16" 
-            - name: KANBOARD_REVERSE_PROXY_AUTO_CREATE_USER
-              value: "true"
-            - name: HIDE_LOGIN_FORM
+            - name: PLUGIN_INSTALLER
               value: "true"
           volumeMounts:
             - name: data
