@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://agones.dev/chart/stable
     chart: agones
-    targetRevision: 1.56.0
+    targetRevision: 1.44.0
     helm:
       values: |
         agones:
