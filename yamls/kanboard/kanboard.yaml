@@ -30,31 +30,25 @@ spec:
           image: kanboard/kanboard:latest
           ports:
             - containerPort: 80
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/sh
-                  - -c
-                  - |
-                    sleep 5
-                    cat > /var/www/app/config.php << 'PHPEOF'
-                    <?php
-                    define('PLUGIN_INSTALLER', true);
-                    define('ENABLE_URL_REWRITE', true);
-                    define('TRUSTED_PROXY_HEADERS', 'HTTP_X_FORWARDED_FOR,HTTP_X_FORWARDED_HOST,HTTP_X_FORWARDED_PROTO');
-                    define('TRUSTED_PROXY_NETWORKS', '10.0.0.0/8,172.16.0.0/12,192.168.0.0/16');
-                    PHPEOF
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
             - name: data
               mountPath: /var/www/app/plugins
               subPath: plugins
+            - name: config
+              mountPath: /var/www/app/config.php
+              subPath: config.php
+            - name: config
+              mountPath: /etc/apache2/conf-enabled/kanboard-apache.conf
+              subPath: kanboard-apache.conf
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: kanboard-data
+        - name: config
+          configMap:
+            name: kanboard-config
 ---
 apiVersion: v1
 kind: Service
