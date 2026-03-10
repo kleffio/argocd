@@ -70,12 +70,6 @@ spec:
                             value: ""
                           - name: ONLINE_MODE
                             value: "true"
-                          - name: USE_AGONES
-                            value: "true"
-                          - name: AGONES_SDK_HTTP_PORT
-                            value: "9358"
-                          - name: AGONES_SDK_GRPC_PORT
-                            value: "9357"
                         resources:
                           requests:
                             memory: 4Gi
@@ -84,6 +78,20 @@ spec:
                         volumeMounts:
                           - name: world
                             mountPath: /data
+                      - name: mc-monitor
+                        image: saulmaldonado/agones-mc
+                        args:
+                          - monitor
+                        env:
+                          - name: INITIAL_DELAY
+                            value: 30s
+                          - name: MAX_ATTEMPTS
+                            value: "10"
+                          - name: INTERVAL
+                            value: 10s
+                          - name: TIMEOUT
+                            value: 10s
+                        imagePullPolicy: Always
                     volumes:
                       - name: world
                         persistentVolumeClaim:
