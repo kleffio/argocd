@@ -13,6 +13,8 @@ spec:
       values: |
         defaultSettings:
           defaultReplicaCount: 3
+        preUpgradeChecker:
+          jobEnabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: longhorn-system
