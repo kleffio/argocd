@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: kanboard-oauth2-setup-v5
+  name: kanboard-oauth2-setup-v6
   namespace: kanboard
 spec:
   ttlSecondsAfterFinished: 120
@@ -29,6 +29,7 @@ spec:
               done
 
               echo "Writing OAuth2 settings..."
+              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('application_url', 'https://kanboard.kleff.ca/');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_callback_url', 'https://kanboard.kleff.ca/oauth/callback');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_client_id', '1fdC80NQnA3g7oj2dtVMlYuRZwovRGB5xgHW4Zop');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_client_secret', 'i9JOBS5uyEWY94tvUNdV2mdxp7YBseV6WlxeXsB7GhAuwc0iKqu7uRWk2b04SVPJG8YgbLpyngzk0ebUdWFTqLClwiOUboEC5yKlXS2xjGWWmgpOK4uEIcZCfPRq0GAp');"
