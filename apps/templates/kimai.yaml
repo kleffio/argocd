@@ -16,7 +16,7 @@ spec:
             repository: kimai/kimai2
             tag: apache
             pullPolicy: IfNotPresent
-          kimaiAdminEmail: admin@kleff.ca
+          kimaiAdminEmail: localadmin@kleff.ca
           kimaiAdminPasswordSecret: kimai-secrets
           existingSecret: kimai-secrets
           ingress:
