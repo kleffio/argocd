@@ -32,6 +32,8 @@ spec:
             base:
               apiVersion: agones.dev/v1
               kind: GameServer
+              metadata:
+                namespace: default
               spec:
                 ports:
                   - name: minecraft
