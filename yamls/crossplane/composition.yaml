@@ -88,6 +88,10 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.maxPlayers
                 toFieldPath: spec.template.spec.containers[0].env[3].value
+                transforms:
+                  - type: convert
+                    convert:
+                      toType: string
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.difficulty
                 toFieldPath: spec.template.spec.containers[0].env[4].value
@@ -97,9 +101,17 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.viewDistance
                 toFieldPath: spec.template.spec.containers[0].env[6].value
+                transforms:
+                  - type: convert
+                    convert:
+                      toType: string
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.worldSeed
                 toFieldPath: spec.template.spec.containers[0].env[7].value
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.onlineMode
                 toFieldPath: spec.template.spec.containers[0].env[8].value
+                transforms:
+                  - type: convert
+                    convert:
+                      toType: string
