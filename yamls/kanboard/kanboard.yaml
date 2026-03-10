@@ -30,18 +30,19 @@ spec:
           image: kanboard/kanboard:latest
           ports:
             - containerPort: 80
-          env:
-            - name: PLUGIN_INSTALLER
-              value: "true"
-            - name: KANBOARD_URL
-              value: "https://kanboard.kleff.ca"
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
+            - name: config
+              mountPath: /var/www/app/config.php
+              subPath: config.php
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: kanboard-data
+        - name: config
+          configMap:
+            name: kanboard-config
 ---
 apiVersion: v1
 kind: Service
