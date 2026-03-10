@@ -1,0 +1,101 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: minecraft-server
+spec:
+  mode: Pipeline
+  compositeTypeRef:
+    apiVersion: kleff.io/v1alpha1
+    kind: XMinecraftServer
+  pipeline:
+    - step: patch-and-transform
+      functionRef:
+        name: function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: pvc
+            base:
+              apiVersion: v1
+              kind: PersistentVolumeClaim
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 10Gi
+
+          - name: gameserver
+            base:
+              apiVersion: agones.dev/v1
+              kind: GameServer
+              spec:
+                ports:
+                  - name: minecraft
+                    containerPort: 25565
+                    protocol: TCP
+                template:
+                  spec:
+                    containers:
+                      - name: minecraft
+                        image: itzg/minecraft-server:latest
+                        env:
+                          - name: EULA
+                            value: "TRUE"
+                          - name: TYPE
+                            value: ""
+                          - name: VERSION
+                            value: ""
+                          - name: MAX_PLAYERS
+                            value: "20"
+                          - name: DIFFICULTY
+                            value: "normal"
+                          - name: MODE
+                            value: "survival"
+                          - name: VIEW_DISTANCE
+                            value: "10"
+                          - name: LEVEL_SEED
+                            value: ""
+                          - name: ONLINE_MODE
+                            value: "true"
+                        resources:
+                          requests:
+                            memory: 4Gi
+                          limits:
+                            memory: 4Gi
+                        volumeMounts:
+                          - name: world
+                            mountPath: /data
+                    volumes:
+                      - name: world
+                        persistentVolumeClaim:
+                          claimName: ""
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.serverName
+                toFieldPath: metadata.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.type
+                toFieldPath: spec.template.spec.containers[0].env[1].value
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.version
+                toFieldPath: spec.template.spec.containers[0].env[2].value
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.maxPlayers
+                toFieldPath: spec.template.spec.containers[0].env[3].value
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.difficulty
+                toFieldPath: spec.template.spec.containers[0].env[4].value
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.gamemode
+                toFieldPath: spec.template.spec.containers[0].env[5].value
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.viewDistance
+                toFieldPath: spec.template.spec.containers[0].env[6].value
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.worldSeed
+                toFieldPath: spec.template.spec.containers[0].env[7].value
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.onlineMode
+                toFieldPath: spec.template.spec.containers[0].env[8].value
