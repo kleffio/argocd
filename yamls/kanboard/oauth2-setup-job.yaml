@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: kanboard-oauth2-setup-v2
+  name: kanboard-oauth2-setup-v3
   namespace: kanboard
 spec:
   ttlSecondsAfterFinished: 120
@@ -34,12 +34,12 @@ spec:
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_client_secret', 'i9JOBS5uyEWY94tvUNdV2mdxp7YBseV6WlxeXsB7GhAuwc0iKqu7uRWk2b04SVPJG8YgbLpyngzk0ebUdWFTqLClwiOUboEC5yKlXS2xjGWWmgpOK4uEIcZCfPRq0GAp');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_authorize_url', 'https://auth.kleff.ca/application/o/authorize/');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_token_url', 'https://auth.kleff.ca/application/o/token/');"
-              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_api_url', 'https://auth.kleff.ca/application/o/userinfo/');"
+              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_user_api_url', 'https://auth.kleff.ca/application/o/userinfo/');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_scopes', 'openid profile email');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_username_key', 'preferred_username');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_name_key', 'name');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_email_key', 'email');"
-              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_userid_key', 'sub');"
+              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_user_id_key', 'sub');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_account_creation', '1');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_email_domains', '');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_groups_key', '');"
