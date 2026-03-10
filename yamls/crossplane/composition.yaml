@@ -39,6 +39,7 @@ spec:
               metadata:
                 namespace: default
               spec:
+                container: minecraft
                 ports:
                   - name: minecraft
                     containerPort: 25565
