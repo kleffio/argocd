@@ -70,6 +70,12 @@ spec:
                             value: ""
                           - name: ONLINE_MODE
                             value: "true"
+                          - name: USE_AGONES
+                            value: "true"
+                          - name: AGONES_SDK_HTTP_PORT
+                            value: "9358"
+                          - name: AGONES_SDK_GRPC_PORT
+                            value: "9357"
                         resources:
                           requests:
                             memory: 4Gi
