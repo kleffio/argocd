@@ -40,6 +40,8 @@ spec:
                 namespace: default
               spec:
                 container: minecraft
+                health:
+                  disabled: true
                 ports:
                   - name: minecraft
                     containerPort: 25565
