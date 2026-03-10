@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: kanboard-oauth2-setup-v4
+  name: kanboard-oauth2-setup-v5
   namespace: kanboard
 spec:
   ttlSecondsAfterFinished: 120
