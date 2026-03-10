@@ -40,9 +40,7 @@ spec:
             - name: KIMAI_SAML_ACTIVATE
               value: "true"
             - name: KIMAI_REVERSE_PROXY_AUTH
-              value: "true"
-            - name: KIMAI_REVERSE_PROXY_USER_HEADER
-              value: "HTTP_X_AUTHENTIK_USERNAME"
+              value: "false"
           mariadb:
             enabled: true
             auth:
