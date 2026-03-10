@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         agones:
-          featureGates: ""
+          featureGates: "SidecarContainers=false"
         gameservers:
           namespaces:
             - default
