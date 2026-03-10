@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: kanboard-oauth2-setup-v3
+  name: kanboard-oauth2-setup-v4
   namespace: kanboard
 spec:
   ttlSecondsAfterFinished: 120
@@ -36,10 +36,10 @@ spec:
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_token_url', 'https://auth.kleff.ca/application/o/token/');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_user_api_url', 'https://auth.kleff.ca/application/o/userinfo/');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_scopes', 'openid profile email');"
-              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_username_key', 'preferred_username');"
-              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_name_key', 'name');"
-              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_email_key', 'email');"
-              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_user_id_key', 'sub');"
+              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_key_username', 'preferred_username');"
+              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_key_name', 'name');"
+              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_key_email', 'email');"
+              sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_key_user_id', 'sub');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_account_creation', '1');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_email_domains', '');"
               sqlite3 "$DB" "INSERT OR REPLACE INTO settings (option, value) VALUES ('oauth2_groups_key', '');"
