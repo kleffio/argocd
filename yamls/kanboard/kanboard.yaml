@@ -33,6 +33,8 @@ spec:
           env:
             - name: PLUGIN_INSTALLER
               value: "true"
+            - name: APPLICATION_URL
+              value: "https://kanboard.kleff.ca"
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
