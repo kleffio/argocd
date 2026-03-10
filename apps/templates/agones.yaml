@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         agones:
-          featureGates: ""
+          featureGates: "AutopilotPassthroughPort=false&GKEAutopilotExtendedDurationPods=false&CountsAndLists=false&DisableResyncOnSDKServer=false&RollingUpdateFix=false&ScheduledAutoscaler=false&PlayerTracking=false&PlayerAllocationFilter=false&PortPolicyNone=false&PortRanges=false&Example=false"
         gameservers:
           namespaces:
             - default
