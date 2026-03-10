@@ -1,0 +1,56 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xminecraftservers.kleff.io
+spec:
+  group: kleff.io
+  names:
+    kind: XMinecraftServer
+    plural: xminecraftservers
+  claimNames:
+    kind: MinecraftServer
+    plural: minecraftservers
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - serverName
+                - type
+                - version
+              properties:
+                serverName:
+                  type: string
+                  description: Name of the Minecraft server
+                type:
+                  type: string
+                  enum: [VANILLA, PAPER, FABRIC, FORGE, SPIGOT, PURPUR]
+                version:
+                  type: string
+                  description: Minecraft version e.g. 1.21.4
+                maxPlayers:
+                  type: integer
+                  default: 20
+                difficulty:
+                  type: string
+                  enum: [peaceful, easy, normal, hard]
+                  default: normal
+                gamemode:
+                  type: string
+                  enum: [survival, creative, adventure]
+                  default: survival
+                viewDistance:
+                  type: integer
+                  default: 10
+                worldSeed:
+                  type: string
+                  default: ""
+                onlineMode:
+                  type: boolean
+                  default: true
