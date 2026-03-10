@@ -1,4 +1,15 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-config
+  namespace: kanboard
+data:
+  config.php: |
+    <?php
+    define('PLUGIN_INSTALLER', true);
+    define('HIDE_LOGIN_FORM', false);
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: kanboard-data
@@ -30,16 +41,19 @@ spec:
           image: kanboard/kanboard:latest
           ports:
             - containerPort: 80
-          env:
-            - name: PLUGIN_INSTALLER
-              value: "true"
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
+            - name: config
+              mountPath: /var/www/app/config.php
+              subPath: config.php
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: kanboard-data
+        - name: config
+          configMap:
+            name: kanboard-config
 ---
 apiVersion: v1
 kind: Service
