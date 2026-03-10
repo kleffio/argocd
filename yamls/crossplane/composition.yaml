@@ -24,7 +24,7 @@ spec:
               spec:
                 accessModes:
                   - ReadWriteOnce
-                storageClassName: local-path-immediate
+                storageClassName: longhorn
                 resources:
                   requests:
                     storage: 10Gi
@@ -32,7 +32,6 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.serverName
                 toFieldPath: metadata.name
-
           - name: gameserver
             base:
               apiVersion: agones.dev/v1
@@ -45,6 +44,7 @@ spec:
                   disabled: true
                 ports:
                   - name: minecraft
+                    portPolicy: Dynamic
                     containerPort: 25565
                     protocol: TCP
                 template:
