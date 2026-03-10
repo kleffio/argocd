@@ -8,3 +8,6 @@ data:
   config.php: |
     <?php
     define('PLUGIN_INSTALLER', true);
+    define('ENABLE_URL_REWRITE', true);
+    define('TRUSTED_PROXY_HEADERS', 'HTTP_X_FORWARDED_FOR,HTTP_X_FORWARDED_HOST,HTTP_X_FORWARDED_PROTO');
+    define('TRUSTED_PROXY_NETWORKS', '10.0.0.0/8,172.16.0.0/12,192.168.0.0/16');

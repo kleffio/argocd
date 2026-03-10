@@ -30,11 +30,6 @@ spec:
           image: kanboard/kanboard:latest
           ports:
             - containerPort: 80
-          env:
-            - name: TRUSTED_PROXY_HEADERS
-              value: "HTTP_X_FORWARDED_FOR,HTTP_X_FORWARDED_HOST,HTTP_X_FORWARDED_PROTO"
-            - name: TRUSTED_PROXY_NETWORKS
-              value: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
           volumeMounts:
             - name: data
               mountPath: /var/www/app/data
