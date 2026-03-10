@@ -7,5 +7,4 @@ metadata:
 data:
   config.php: |
     <?php
-    define('APPLICATION_URL', 'https://kanboard.kleff.ca/');
     define('PLUGIN_INSTALLER', true);
