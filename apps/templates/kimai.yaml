@@ -41,6 +41,11 @@ spec:
               value: "true"
             - name: KIMAI_REVERSE_PROXY_AUTH
               value: "false"
+            - name: KIMAI_CERT
+              valueFrom:
+                secretKeyRef:
+                  name: kimai-secrets
+                  key: kimai-cert
           mariadb:
             enabled: true
             auth:

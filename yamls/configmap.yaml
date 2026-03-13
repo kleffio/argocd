@@ -25,7 +25,7 @@ data:
             singleSignOnService:
               url: "https://auth.kleff.ca/application/saml/kimai/sso/binding/redirect/"
               binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-            x509cert: "KIMAI_CERT"
+            x509cert: "%env(KIMAI_CERT)%"
           sp:
             entityId: "https://kimai.kleff.ca/auth/saml"
             assertionConsumerService:
